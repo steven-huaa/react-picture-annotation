@@ -30,6 +30,7 @@ interface IReactPictureAnnotationProps {
     onChange: (value: string) => void,
     onDelete: () => void
   ) => React.ReactElement;
+  editable: boolean;
 }
 
 interface IStageState {
@@ -48,6 +49,7 @@ export default class ReactPictureAnnotation extends React.Component<
   IReactPictureAnnotationProps
 > {
   public static defaultProps = {
+    editable: false,
     marginWithInput: 10,
     scrollSpeed: 0.0005,
     annotationStyle: defaultShapeStyle,
@@ -161,7 +163,7 @@ export default class ReactPictureAnnotation extends React.Component<
   };
 
   public render() {
-    const { width, height, inputElement } = this.props;
+    const { width, height, inputElement, editable } = this.props;
     const { showInput, inputPosition, inputComment } = this.state;
     return (
       <div className="rp-stage">
@@ -178,11 +180,11 @@ export default class ReactPictureAnnotation extends React.Component<
           ref={this.canvasRef}
           width={width * 2}
           height={height * 2}
-          onMouseDown={this.onMouseDown}
-          onMouseMove={this.onMouseMove}
-          onMouseUp={this.onMouseUp}
-          onMouseLeave={this.onMouseLeave}
-          onWheel={this.onWheel}
+          editable ? onMouseDown={this.onMouseDown} : null
+          editable ? onMouseMove={this.onMouseMove} : null
+          editable ? onMouseUp={this.onMouseUp} : null
+          editable ? onMouseLeave={this.onMouseLeave} : null
+          editable ? onWheel={this.onWheel} : null
         />
         {showInput && (
           <div className="rp-selected-input" style={inputPosition}>
