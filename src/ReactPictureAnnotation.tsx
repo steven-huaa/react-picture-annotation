@@ -181,11 +181,11 @@ export default class ReactPictureAnnotation extends React.Component<
           ref={this.canvasRef}
           width={width * 2}
           height={height * 2}
-          editable ? onMouseDown={this.onMouseDown} : null
+<!--           editable ? onMouseDown={this.onMouseDown} : null
           editable ? onMouseMove={this.onMouseMove} : null
           editable ? onMouseUp={this.onMouseUp} : null
           editable ? onMouseLeave={this.onMouseLeave} : null
-          editable ? onWheel={this.onWheel} : null
+          editable ? onWheel={this.onWheel} : null -->
         />
         {showInput && (
           <div className="rp-selected-input" style={inputPosition}>
