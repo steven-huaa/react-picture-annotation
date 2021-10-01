@@ -164,6 +164,7 @@ export default class ReactPictureAnnotation extends React.Component<
 
   public render() {
     const { width, height, inputElement, editable } = this.props;
+    console.log("editable", editable);
     const { showInput, inputPosition, inputComment } = this.state;
     return (
       <div className="rp-stage">
