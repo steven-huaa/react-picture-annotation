@@ -9,7 +9,7 @@ import {
   IShape,
   IShapeBase,
   IShapeStyle,
-  RectShape,
+  RectShape
 } from "./Shape";
 import Transformer, { ITransformer } from "./Transformer";
 
@@ -30,7 +30,6 @@ interface IReactPictureAnnotationProps {
     onChange: (value: string) => void,
     onDelete: () => void
   ) => React.ReactElement;
-  editable: boolean;
 }
 
 interface IStageState {
@@ -42,14 +41,13 @@ interface IStageState {
 const defaultState: IStageState = {
   scale: 1,
   originX: 0,
-  originY: 0,
+  originY: 0
 };
 
 export default class ReactPictureAnnotation extends React.Component<
   IReactPictureAnnotationProps
 > {
   public static defaultProps = {
-    editable: false,
     marginWithInput: 10,
     scrollSpeed: 0.0005,
     annotationStyle: defaultShapeStyle,
@@ -63,16 +61,16 @@ export default class ReactPictureAnnotation extends React.Component<
         onChange={onChange}
         onDelete={onDelete}
       />
-    ),
+    )
   };
 
   public state = {
     inputPosition: {
       left: 0,
-      top: 0,
+      top: 0
     },
     showInput: false,
-    inputComment: "",
+    inputComment: ""
   };
 
   set selectedId(value: string | null) {
@@ -147,7 +145,7 @@ export default class ReactPictureAnnotation extends React.Component<
     const { originX, originY, scale } = this.scaleState;
     return {
       positionX: (positionX - originX) / scale,
-      positionY: (positionY - originY) / scale,
+      positionY: (positionY - originY) / scale
     };
   };
 
@@ -158,13 +156,12 @@ export default class ReactPictureAnnotation extends React.Component<
       x: x * scale + originX,
       y: y * scale + originY,
       width: width * scale,
-      height: height * scale,
+      height: height * scale
     };
   };
 
   public render() {
-    const { width, height, inputElement, editable } = this.props;
-    console.log("editable", editable);
+    const { width, height, inputElement } = this.props;
     const { showInput, inputPosition, inputComment } = this.state;
     return (
       <div className="rp-stage">
@@ -181,11 +178,11 @@ export default class ReactPictureAnnotation extends React.Component<
           ref={this.canvasRef}
           width={width * 2}
           height={height * 2}
-<!--           editable ? onMouseDown={this.onMouseDown} : null
-          editable ? onMouseMove={this.onMouseMove} : null
-          editable ? onMouseUp={this.onMouseUp} : null
-          editable ? onMouseLeave={this.onMouseLeave} : null
-          editable ? onWheel={this.onWheel} : null -->
+          onMouseDown={this.onMouseDown}
+          onMouseMove={this.onMouseMove}
+          onMouseUp={this.onMouseUp}
+          onMouseLeave={this.onMouseLeave}
+          onWheel={this.onWheel}
         />
         {showInput && (
           <div className="rp-selected-input" style={inputPosition}>
@@ -243,9 +240,9 @@ export default class ReactPictureAnnotation extends React.Component<
             showInput: true,
             inputPosition: {
               left: x,
-              top: y + height + this.props.marginWithInput,
+              top: y + height + this.props.marginWithInput
             },
-            inputComment: item.getAnnotationData().comment || "",
+            inputComment: item.getAnnotationData().comment || ""
           });
         }
       }
@@ -253,7 +250,7 @@ export default class ReactPictureAnnotation extends React.Component<
       if (!hasSelectedItem) {
         this.setState({
           showInput: false,
-          inputComment: "",
+          inputComment: ""
         });
       }
     }
@@ -376,14 +373,14 @@ export default class ReactPictureAnnotation extends React.Component<
               this.scaleState = {
                 originX: 0,
                 originY: (canvasHeight - scale * height) / 2,
-                scale,
+                scale
               };
             } else {
               const scale = canvasHeight / height;
               this.scaleState = {
                 originX: (canvasWidth - scale * width) / 2,
                 originY: 0,
-                scale,
+                scale
               };
             }
           }
