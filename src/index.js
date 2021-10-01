@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
-import { default as ReactPictureAnnotation } from "./ReactPictureAnnotation";
+import {
+  default as ReactPictureAnnotation,
+  defaultShapeStyle
+} from "./ReactPictureAnnotation";
 
 const App = () => {
   const [pageSize, setPageSize] = useState({
@@ -68,6 +71,11 @@ const App = () => {
         width={pageSize.width}
         height={pageSize.height}
         annotationData={data}
+        annotationStyleAlt={{
+          ...defaultShapeStyle,
+          shapeStrokeStyle: "#2193ff",
+          transformerBackground: "black"
+        }}
       />
     </div>
   );

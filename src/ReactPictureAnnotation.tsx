@@ -24,6 +24,7 @@ interface IReactPictureAnnotationProps {
   height: number;
   image: string;
   annotationStyle: IShapeStyle;
+  annotationStyleAlt: IShapeStyle;
   defaultAnnotationSize?: number[];
   inputElement: (
     value: string,
@@ -51,6 +52,7 @@ export default class ReactPictureAnnotation extends React.Component<
     marginWithInput: 10,
     scrollSpeed: 0.0005,
     annotationStyle: defaultShapeStyle,
+    annotationStyleAlt: defaultShapeStyle,
     inputElement: (
       value: string,
       onChange: (value: string) => void,
@@ -85,6 +87,10 @@ export default class ReactPictureAnnotation extends React.Component<
 
   get annotationStyle() {
     return this.props.annotationStyle;
+  }
+
+  get annotationStyleAlt() {
+    return this.props.annotationStyleAlt;
   }
 
   get defaultAnnotationSize() {
@@ -268,14 +274,15 @@ export default class ReactPictureAnnotation extends React.Component<
     if (annotationData) {
       const refreshShapesWithAnnotationData = () => {
         this.selectedId = null;
-        this.shapes = annotationData.map(
-          (eachAnnotationData) =>
-            new RectShape(
-              eachAnnotationData,
-              this.onShapeChange,
-              this.annotationStyle
-            )
-        );
+        this.shapes = annotationData.map((eachAnnotationData) => {
+          return new RectShape(
+            eachAnnotationData,
+            this.onShapeChange,
+            eachAnnotationData.editable
+              ? this.annotationStyle
+              : this.annotationStyleAlt
+          );
+        });
         this.onShapeChange();
       };
 
