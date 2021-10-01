@@ -213,7 +213,8 @@ export default class ReactPictureAnnotation extends React.Component<
       let hasSelectedItem = false;
 
       for (const item of this.shapes) {
-        const isSelected = item.getAnnotationData().id === this.selectedId;
+        const { id, editable } = item.getAnnotationData();
+        const isSelected = (id === this.selectedId && editable) ?? false;
         const { x, y, height } = item.paint(
           this.canvas2D,
           this.calculateShapePosition,

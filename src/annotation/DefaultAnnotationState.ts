@@ -22,7 +22,7 @@ export class DefaultAnnotationState implements IAnnotationState {
       shapes,
       currentTransformer,
       onShapeChange,
-      setAnnotationState: setState,
+      setAnnotationState: setState
     } = this.context;
 
     if (
@@ -58,8 +58,8 @@ export class DefaultAnnotationState implements IAnnotationState {
             y: positionY,
             width: 0,
             height: 0,
-            type: "RECT",
-          },
+            type: "RECT"
+          }
         },
         onShapeChange,
         this.context.annotationStyle

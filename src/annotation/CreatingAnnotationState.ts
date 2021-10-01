@@ -14,11 +14,11 @@ export default class CreatingAnnotationState implements IAnnotationState {
     if (shapes.length > 0) {
       const currentShape = shapes[shapes.length - 1];
       const {
-        mark: { x, y },
+        mark: { x, y }
       } = currentShape.getAnnotationData();
       currentShape.adjustMark({
         width: positionX - x,
-        height: positionY - y,
+        height: positionY - y
       });
     }
   };
@@ -58,7 +58,7 @@ export default class CreatingAnnotationState implements IAnnotationState {
     const [width, height] = this.context.defaultAnnotationSize;
     shape.adjustMark({
       width,
-      height,
+      height
     });
     return true;
   };

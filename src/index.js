@@ -27,6 +27,7 @@ const App = () => {
         height: 83.2369942196532,
         type: "RECT"
       },
+      editable: false,
       comment: "Google"
     },
     {
@@ -38,6 +39,7 @@ const App = () => {
         height: 149.1329479768786,
         type: "RECT"
       },
+      editable: false,
       comment: "Mozilla"
     },
     {
@@ -49,10 +51,11 @@ const App = () => {
         height: 83.23699421965318,
         type: "RECT"
       },
+      editable: true,
       comment: "IPsoft"
     }
   ];
-
+  const [data, setData] = useState(idata);
   const onSelect = (selectedId) => {};
   const onChange = (data) => {};
 
@@ -64,7 +67,7 @@ const App = () => {
         onChange={onChange}
         width={pageSize.width}
         height={pageSize.height}
-        annotationData={idata}
+        annotationData={data}
       />
     </div>
   );

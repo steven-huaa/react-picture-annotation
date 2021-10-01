@@ -13,7 +13,7 @@ export const defaultShapeStyle: IShapeStyle = {
   shapeStrokeStyle: "#f8f9fa",
   shapeShadowStyle: "hsla(210, 9%, 31%, 0.35)",
   transformerBackground: "#5c7cfa",
-  transformerSize: 10,
+  transformerSize: 10
 };
 
 export interface IShapeStyle {
@@ -92,19 +92,22 @@ export class RectShape implements IShape {
     const { x, y } = this.annotationData.mark;
     this.dragStartOffset = {
       offsetX: positionX - x,
-      offsetY: positionY - y,
+      offsetY: positionY - y
     };
   };
 
   public onDrag = (positionX: number, positionY: number) => {
-    this.annotationData.mark.x = positionX - this.dragStartOffset.offsetX;
-    this.annotationData.mark.y = positionY - this.dragStartOffset.offsetY;
+    if (this.annotationData.editable) {
+      this.annotationData.mark.x = positionX - this.dragStartOffset.offsetX;
+      this.annotationData.mark.y = positionY - this.dragStartOffset.offsetY;
+    }
+
     this.onChangeCallBack();
   };
 
   public checkBoundary = (positionX: number, positionY: number) => {
     const {
-      mark: { x, y, width, height },
+      mark: { x, y, width, height }
     } = this.annotationData;
 
     return (
@@ -135,7 +138,7 @@ export class RectShape implements IShape {
       fontFamily,
       shapeBackground,
       shapeStrokeStyle,
-      shapeShadowStyle,
+      shapeShadowStyle
     } = this.shapeStyle;
 
     canvas2D.shadowBlur = shadowBlur;
@@ -174,7 +177,7 @@ export class RectShape implements IShape {
     x = this.annotationData.mark.x,
     y = this.annotationData.mark.y,
     width = this.annotationData.mark.width,
-    height = this.annotationData.mark.height,
+    height = this.annotationData.mark.height
   }: {
     x?: number;
     y?: number;
